@@ -1,4 +1,4 @@
-#A faire : moyenne chaque UE + moyenne de chaque gens
+#A faire : moyenne de chaque gens
 
 
 #importation de module pour realiser le projet 
@@ -52,31 +52,25 @@ P = ["Jean","Pierre","Michel","Andre","Philippe","Rene","Louis","Alain",\
      "Aurelie","Laurence","Michele","Cecile","Therese","Colette","Virginie"]
 
 
-name = input("entrez un nom \n") #Association d'un eleve a ses notes d'UE. Merci Philippe :)
+name = input("Entrez le nom de l'eleve dont vous voulez connaitre les notes : \n") #Association d'un eleve a ses notes d'UE. Merci Philippe :)
 rang = -1
 try:
     rang = P.index(name)
-    print(T[rang])
+    print(name,"a obtenu les notes",T[rang]) #Enlever la derniere colonne et ajouter des lignes pour savoir si l'eleve a valide son UE
 except:
-    print("erreur : pas connu")
+    print("Vous ne connaissez pas vos eleves ? :( Entrez le nom d'un de vos eleves")
 
-#Moyenne de chaque UE (moyenne de chaque colonne)
-moy_colonne = np.mean(T,0)[:4] #0 : Traitement des valeurs en ligne pour chaque colonne.
+#Moyenne de chaque theme (moyenne de chaque colonne)
+moyennes = np.mean(T,0)[:4] #0 : Traitement des valeurs en ligne pour chaque colonne.
                                     #Garde les 4 premieres valeurs
 
-#
+#Moyenne pour une theme colonne n
+def moy_colonne(n):
+    moy = np.mean(T,0)[n]
+    print(moy)
+    
+    
 
 
 
 
-
-#Programme pour connaitre le major d'une UE (non fini, probleme dedans)
-"""def fonct_major(T):
-    for i in range(len(T)):
-        temp=T[i]
-        j=i
-        while j>0 and temp<T[j-1]:
-            T[j]=T[j-1]
-            j-=1
-        T[j]=temp
-    return T""" 
