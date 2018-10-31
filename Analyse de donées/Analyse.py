@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #A faire : moyenne de chaque gens
 
 
@@ -64,12 +65,19 @@ except:
 moyennes = np.mean(T,0)[:4] #0 : Traitement des valeurs en ligne pour chaque colonne.
                                     #Garde les 4 premieres valeurs
 
-#Moyenne pour une theme colonne n
+#Moyenne pour un theme colonne n
 def moy_colonne(n):
     moy = np.mean(T,0)[n]
     print(moy)
     
     
+#Moyenne de chaque eleve
+def moy_eleve(e,T):  #e : numéro de ligne du tableau
+    m=0
+    for i in range(len(T[e])):
+        m += T[e][i]  #rang i dans la liste e (ligne du tableau) de la liste T
+    m = m/450
+    print("l' eleve a obtenu une moyenne de ", m)
 
 
 
