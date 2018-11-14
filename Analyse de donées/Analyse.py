@@ -17,8 +17,8 @@ T = np.array(your_list).astype(np.float) #transforme tous les elements du tablea
 
 #Programme permettant de mettre les notes superieures au plafond 
 """
-for i in range (len(T)): #pour tous les i appartenant a  l'intervalle [nombre d'elements du tableau T]
-#si l'element est superieur a  50, alors cet element prend comme valeur 50   
+for i in range (len(T)): #pour tous les i appartenant aÂ  l'intervalle [nombre d'elements du tableau T]
+#si l'element est superieur aÂ  50, alors cet element prend comme valeur 50   
     if T[i,0] > 50 : 
         T[i,0]=50   
 
@@ -38,8 +38,8 @@ for i in range (len(T)):
 """
 
 def maj(T,o,n):
-    for i in range (len(T)): #pour tous les i appartenant à l'intervalle [nombre d'éléments du tableau T]
-    #si l'élément est supérieur à 50, alors cet élément prend comme valeur 50   
+    for i in range (len(T)): #pour tous les i appartenant Ã  l'intervalle [nombre d'Ã©lÃ©ments du tableau T]
+    #si l'Ã©lÃ©ment est supÃ©rieur Ã  50, alors cet Ã©lÃ©ment prend comme valeur 50   
         if T[i,n] > o[n] : 
             T[i,n]= o[n] 
     return T
@@ -86,10 +86,10 @@ P = ["Jean","Pierre","Michel","Andre","Philippe","Rene","Louis","Alain",\
 
 name = input("Entrez le nom de l'eleve dont vous voulez connaitre les notes : \n") #Association d'un eleve a ses notes d'UE. Merci Philippe :)
 rang = -1
-try:
+if name in P:
     rang = P.index(name)
     print(name,"a obtenu les notes",T[rang]) #Enlever la derniere colonne et ajouter des lignes pour savoir si l'eleve a valide son UE
-except:
+else:
     print("Vous ne connaissez pas vos eleves ? :( Entrez le nom d'un de vos eleves")
 
 #Moyenne de chaque theme (moyenne de chaque colonne)
@@ -103,12 +103,12 @@ def moy_colonne(n):
     
     
 #Moyenne de chaque eleve
-def moy_eleve(e,T):  #e : num�ro de ligne du tableau
+def moy_eleve(e,T,c=9):  #e : numéro de ligne du tableau et c : Coefficient
     m=0
-    for i in range(len(T[e])):
+    for i in range(len(T[e])+1):
         m += T[e][i]  #rang i dans la liste e (ligne du tableau) de la liste T
-    m = m/450
-    print("l' eleve a obtenu une moyenne de ", m)
+    m = m/c #On considère qu'une note sur 50 a un coefficient 1 dans notre cas actuel
+    print("l' eleve a obtenu une moyenne de ", m,'/50')
 
 
 
