@@ -76,8 +76,9 @@ def major (l,n):
 
 
 
-
-#Attribution de chaque ligne de notes a un eleve
+############################################################################################################################
+#%% Attribution de chaque ligne de notes a un eleve######################################################################### 
+############################################################################################################################
 P = ["Jean","Pierre","Michel","Andre","Philippe","Rene","Louis","Alain",\
      "Jacques","Bernard","Marcel","Daniel","Roger","Robert","Claude","Paul",\
      "Christian","Henri","Georges","Nicolas","Francois","Patrick","Gerard",\
@@ -93,7 +94,7 @@ P = ["Jean","Pierre","Michel","Andre","Philippe","Rene","Louis","Alain",\
      "Julie","Annie","Patricia","Brigitte","Lucie","Camille","Lea","Alice",\
      "Aurelie","Laurence","Michele","Cecile","Therese","Colette","Virginie"]
 
-
+"""
 name = input("Entrez le nom de l'eleve dont vous voulez connaitre les notes : \n") #Association d'un eleve a ses notes d'UE. Merci Philippe :)
 rang = -1
 if name in P:
@@ -101,7 +102,31 @@ if name in P:
     print(name,"a obtenu les notes",T[rang]) #Enlever la derniere colonne et ajouter des lignes pour savoir si l'eleve a valide son UE
 else:
     print("Vous ne connaissez pas vos eleves ? :( Entrez le nom d'un de vos eleves")
+ """   
+    
+def nametorang(name):
+    if name in P:
+        return P.index(name)
+    else:
+        return "Erreur"
 
+
+ 
+def fiche_eleve(name,T,c):
+    moyenne = 0
+    if nametorang(name) != "Erreur":
+        rang = nametorang(name)
+        moyenne = moy_eleve(name,T,c)
+        return [name,", ", rang, " : Les notes de cette eleve sont ",T[rang],". Il a une moyenne de ", moyenne]
+    else:
+        print("Erreur")
+    
+    
+def print_fiche_eleve(name,T,c):
+    r = " ".join(fiche_eleve(name,T,c))   
+    return r
+    
+    
     
     
 ############################################################################################################################
@@ -123,13 +148,13 @@ def moy_colonne(n):
 ############################################################################################################################   
 #%% Moyenne de chaque eleve ################################################################################################
 ############################################################################################################################ 
-def moy_eleve(e,T,c=9):  #e : numéro de ligne du tableau et c : Coefficient
+def moy_eleve(name,T,c):  #e : numéro de ligne du tableau et c : Coefficient ici 9
     m=0
-    for i in range(len(T[e])+1):
-        m += T[e][i]  #rang i dans la liste e (ligne du tableau) de la liste T
+    if nametorang(name) != "Erreur":
+        rang = nametorang(name)
+    else:
+        print("Erreur")
+    for i in range(len(T[rang])):
+        m += T[rang][i]  #rang i dans la liste e (ligne du tableau) de la liste T
     m = m/c #On considère qu'une note sur 50 a un coefficient 1 dans notre cas actuel
     print("l' eleve a obtenu une moyenne de ", m,'/50')
-
-
-
-
