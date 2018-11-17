@@ -6,10 +6,13 @@
 ############################################################################################################################ 
 import csv
 import numpy as np
-
+import sys
 print("Bonjour! Bienvenue sur notre plateforme interactive !")
-str(input("Pour bien commencer, veuillez cliquer sur 'p' si vous connaissez déjà les fonctions existentes, sinon tapez 'o' :"))
-
+a = str(input("Pour bien commencer, veuillez cliquer sur 'p' si vous connaissez déjà les fonctions existentes, sinon tapez 'o' :"))
+if a == "q" :
+    sys.exit(0) 
+else : 
+    print("blablabla")
 
 ############################################################################################################################
 #%% Programme permettant de mettre les notes superieures au plafond ########################################################
@@ -104,6 +107,7 @@ else:
     print("Vous ne connaissez pas vos eleves ? :( Entrez le nom d'un de vos eleves")
  """   
     
+ 
 def nametorang(name):
     if name in P:
         return P.index(name)
@@ -113,26 +117,48 @@ def nametorang(name):
 
  
 def fiche_eleve(name,T,c):
-    moyenne = 0
     if nametorang(name) != "Erreur":
         rang = nametorang(name)
         moyenne = moy_eleve(name,T,c)
-        return [name,", ", rang, " : Les notes de cette eleve sont ",T[rang],". Il a une moyenne de ", moyenne]
+        print(name, rang, " : Les notes de cette eleve sont ",T[rang],", sa moyenne est de ",moyenne)
     else:
         print("Erreur")
     
     
-def print_fiche_eleve(name,T,c):
-    r = " ".join(fiche_eleve(name,T,c))   
-    return r
+    
+def oui_ou_non(name,T):
+    if nametorang(name) != "Erreur":
+        rang = nametorang(name)
+        if T[rang,4] == 1.0:
+            print(name," a bien eu son semestre !")
+        else :
+            print(name," n'a pas eu son semestre, et doit passer les rattrapages ...")
+    else:
+        print("Erreur")
     
     
     
+#pas fini
+def qui(P,T):
+    for i in (len(T) and len(P)):
+        T[i] = P(i)
+        print(T)
+            
+
+#pas fini
+def oui_ou_non_tous(T):
+    d = 0
+    for i in range (len(T)):
+        if T[i,4] == 1.0 :
+            d = nametorang(name)
+            
+            print(name, rang)
     
+
 ############################################################################################################################
 #%% Attribution de chaque ligne de notes a un eleve ########################################################################
 ############################################################################################################################
-moyennes = np.mean(T,0)[:4] #0 : Traitement des valeurs en ligne pour chaque colonne.
+#moyennes = np.mean(T,0)[:4] #0 : Traitement des valeurs en ligne pour chaque colonne.
                                     #Garde les 4 premieres valeurs
 
     
@@ -157,4 +183,9 @@ def moy_eleve(name,T,c):  #e : numéro de ligne du tableau et c : Coefficient ic
     for i in range(len(T[rang])):
         m += T[rang][i]  #rang i dans la liste e (ligne du tableau) de la liste T
     m = m/c #On considère qu'une note sur 50 a un coefficient 1 dans notre cas actuel
-    print("l' eleve a obtenu une moyenne de ", m,'/50')
+    return m
+
+
+
+
+
