@@ -7,6 +7,7 @@
 import csv
 import numpy as np
 import sys
+import matplotlib as plt
 
 
 def stop():
@@ -283,3 +284,30 @@ def notes_sur_20():
     plt.plot([0,100],[10,10],'-')
     plt.plot(range(len(notes)),notes,'+')
     plt.show()
+    
+
+#Affiche un camembert des élèves au-dessus de la moyenne et en dessous)
+def camembertNotes():
+    labels = 'Supérieur à 20', 'Inférieur à 20'
+    sizes = [90,10]
+    explode = (0, 0.8)  # Met en exergue les 10% en dessous de la moyenne
+    
+    fig1, camembert = plt.subplots()
+    camembert.pie(sizes, labels=labels, explode=explode, shadow=True)
+    camembert.axis('equal') #Permet d'avoir un beau camembert circulaire. =D
+
+    plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
