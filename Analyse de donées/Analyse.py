@@ -63,6 +63,9 @@ for i in range (len(T)):
 #print(T)   
 """
 
+maxs = [50,100,100,200]
+
+
 def maj(T,o,n):
     for i in range (len(T)): #pour tous les i appartenant Ã  l'intervalle [nombre d'Ã©lÃ©ments du tableau T]
     #si l'Ã©lÃ©ment est supÃ©rieur Ã  50, alors cet Ã©lÃ©ment prend comme valeur 50   
@@ -70,7 +73,9 @@ def maj(T,o,n):
             T[i,n]= o[n] 
     return T
     stop()
-        
+    
+
+    
 def maj_tout(T,o):
     n=0
     while n<len(o):
@@ -129,9 +134,7 @@ def nametorang(name):
     else:
         return "Erreur"
         
-
-
-    
+  
 #pas fini
 def qui(T,P):
     for i in range (len(T)):
@@ -230,20 +233,53 @@ def moy_eleve(name,T,c):  #e : numéro de ligne du tableau et c : Coefficient ic
 import matplotlib.pyplot as plt
 import numpy as np
 
-AA = [3,8,16,25,36,48,62,78,94,112,131,151,172,194,218,243,267,294,321,350]
-BB = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+AA = [0,3,8,16,25,36,48,62,78,94,112,131,151,172,194,218,243,267,294,321,350]
+#BB = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 
-def courbe_nbXP_note20(plafond):
+AAsur450 = [9/7*e for e in AA]
+
+
+
+def indexmin(l,v):
+    i = 0
+    while v > l[i]:
+        i += 1
+        # if i > len(l) : error
+    return i - 1
+#print(indexmin(AAsur450,23))
+
+
+def arrondir(v,n):
+    # arrondi a n chifres apres la virgule...
+    return int(v*10**n)/10**n
+
+#convertit le nombre d'XP en une note sur 20 arrondi à 2 chiffres après la virgule
+def note(xp,tab):
+    m1 = indexmin(tab,xp)
+    m2 = m1 + 1
+    xp1 = tab[m1]
+    xp2 = tab[m2]
+    dm = 1
+    dxp = xp2 - xp1
+    a = dm/dxp
+    b = m1 - xp1*a
+    m = a*xp + b
+    return arrondir(m,2)
+
+
+#affiche la courbe plallier/note sur 20
+def courbe_nbXP_note20(plafond): 
     x=np.linspace(0,plafond+30,10)
-    plt.plot(AA,BB)
+    plt.plot(AA,BB,"+")
     plt.ylabel('Nombre de XP')
     plt.xlabel("Note sur 20")
     plt.show()
 
-#pas fini
-def quelle_note?(XP,AA,BB):
-    for i in AA:
-        while AA[i] =< XP =< AA[i+1]:
-            AA[i] = BB[i]
-            AA[i+1] = BB[i+1]
-            nXP = 
+#affiche un graphique avec un nuage de points (élèves ayant au dessus de la moyenne et en dessous)
+def notes_sur_20():
+    tabsommexp = [sum(c[:-1]) for c in maj_tout(T,maxs)]
+    notes = [note(xp,AAsur450) for xp in tabsommexp]
+    notes.sort()
+    plt.plot([0,100],[10,10],'-')
+    plt.plot(range(len(notes)),notes,'+')
+    plt.show()
