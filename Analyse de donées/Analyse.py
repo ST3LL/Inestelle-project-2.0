@@ -290,16 +290,57 @@ def notes_sur_20():
 def camembertNotes():
     labels = 'Supérieur à 20', 'Inférieur à 20'
     sizes = [90,10]
-    explode = (0, 0.8)  # Met en exergue les 10% en dessous de la moyenne
+    explode = (0, 0.3)  # Met en exergue les 10% en dessous de la moyenne
     
-    fig1, camembert = plt.subplots()
+    fig, camembert = plt.subplots()
     camembert.pie(sizes, labels=labels, explode=explode, shadow=True)
     camembert.axis('equal') #Permet d'avoir un beau camembert circulaire. =D
 
     plt.show()
 
+#Histogramme répartition élèves selon moyennes générales
+def theme1():    
+    fig, hist_moy = plt.subplots()
+    
+    hist_moy.set_xlabel('Moyennes Thème 1')
+    hist_moy.set_ylabel("Nombre d'élèves")
+    hist_moy.set_title('Répartition des élèves selon leur moyenne au thème 1')
+    
+    plt.show()
+    
+
+def theme2():    
+    fig, hist_moy = plt.subplots()
+    
+    hist_moy.set_xlabel('Moyennes Thème 2')
+    hist_moy.set_ylabel("Nombre d'élèves")
+    hist_moy.set_title('Répartition des élèves selon leur moyenne au thème 2')
+    
+    plt.show()
+    
+    
+def theme3():    
+    fig, hist_moy = plt.subplots()
+    
+    hist_moy.set_xlabel('Moyennes Thème 3')
+    hist_moy.set_ylabel("Nombre d'élèves")
+    hist_moy.set_title('Répartition des élèves selon leur moyenne au thème 3')
+    
+    plt.show()
+    
+    
+def theme4():    
+    fig, hist_moy = plt.subplots()
+    
+    hist_moy.set_xlabel('Moyennes Thème 4')
+    hist_moy.set_ylabel("Nombre d'élèves")
+    hist_moy.set_title('Répartition des élèves selon leur moyenne au thème 4')
+    
+    plt.show()
 
 
+#Histogramme thèmes
+    
 
 
 
