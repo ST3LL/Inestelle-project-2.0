@@ -298,43 +298,79 @@ def camembertNotes():
 
     plt.show()
 
-#Histogramme répartition élèves selon moyennes générales
+#Histogramme répartition élèves selon moyennes générales en 
 def theme1():    
-    fig, hist_moy = plt.subplots()
+    L1 = [row[0] for row in T]
+    xmin = 0
+    xmax = 50
+    ymin=0
+    ymax=25
     
-    hist_moy.set_xlabel('Moyennes Thème 1')
-    hist_moy.set_ylabel("Nombre d'élèves")
-    hist_moy.set_title('Répartition des élèves selon leur moyenne au thème 1')
+    fig, hist_xp = plt.subplots()
+    
+    plt.hist(L1)
+    hist_xp.set_xlim(xmin,xmax)
+    hist_xp.set_ylim(ymin,ymax)
+    hist_xp.set_xlabel("Nombre d'XP Thème 1")
+    hist_xp.set_ylabel("Nombre d'élèves")
+    hist_xp.set_title("Répartition des élèves selon leur nombre d'XP au thème 1")
     
     plt.show()
     
 
 def theme2():    
-    fig, hist_moy = plt.subplots()
+    L2 = [row[1] for row in T]
+    xmin = 0
+    xmax = 100
+    ymin=0
+    ymax=20
     
-    hist_moy.set_xlabel('Moyennes Thème 2')
-    hist_moy.set_ylabel("Nombre d'élèves")
-    hist_moy.set_title('Répartition des élèves selon leur moyenne au thème 2')
+    fig, hist_xp = plt.subplots()
+    
+    plt.hist(L2)
+    hist_xp.set_xlim(xmin,xmax)
+    hist_xp.set_ylim(ymin,ymax)
+    hist_xp.set_xlabel("Nombre d'XP Thème 2")
+    hist_xp.set_ylabel("Nombre d'élèves")
+    hist_xp.set_title("Répartition des élèves selon leur nombre d'XP au thème 2")
     
     plt.show()
     
     
 def theme3():    
-    fig, hist_moy = plt.subplots()
+    L3 = [row[2] for row in T]
+    xmin = 0
+    xmax = 100
+    ymin=0
+    ymax=25
     
-    hist_moy.set_xlabel('Moyennes Thème 3')
-    hist_moy.set_ylabel("Nombre d'élèves")
-    hist_moy.set_title('Répartition des élèves selon leur moyenne au thème 3')
+    fig, hist_xp = plt.subplots()
+    
+    plt.hist(L3)
+    hist_xp.set_xlim(xmin,xmax)
+    hist_xp.set_ylim(ymin,ymax)
+    hist_xp.set_xlabel("Nombre d'XP Thème 3")
+    hist_xp.set_ylabel("Nombre d'élèves")
+    hist_xp.set_title("Répartition des élèves selon leur nombre d'XP au thème 3")
     
     plt.show()
     
     
 def theme4():    
-    fig, hist_moy = plt.subplots()
+    L4 = [row[3] for row in T]
+    xmin = 0
+    xmax = 200
+    ymin=0
+    ymax=20
     
-    hist_moy.set_xlabel('Moyennes Thème 4')
-    hist_moy.set_ylabel("Nombre d'élèves")
-    hist_moy.set_title('Répartition des élèves selon leur moyenne au thème 4')
+    fig, hist_xp = plt.subplots()
+    
+    plt.hist(L4)
+    hist_xp.set_xlim(xmin,xmax)
+    hist_xp.set_ylim(ymin,ymax)
+    hist_xp.set_xlabel("Nombre d'XP Thème 4")
+    hist_xp.set_ylabel("Nombre d'élèves")
+    hist_xp.set_title("Répartition des élèves selon leur nombre d'XP au thème 4")
     
     plt.show()
 
