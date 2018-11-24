@@ -231,9 +231,6 @@ def moy_eleve(name,T,c):  #e : numéro de ligne du tableau et c : Coefficient ic
 #%% Courbe nb XP <=> note sur 20 ###########################################################################################
 ############################################################################################################################ 
 
-import matplotlib.pyplot as plt
-import numpy as np
-
 AA = [0,3,8,16,25,36,48,62,78,94,112,131,151,172,194,218,243,267,294,321,350]
 #BB = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 
@@ -298,9 +295,11 @@ def camembertNotes():
 
     plt.show()
 
-#Histogramme répartition élèves selon moyennes générales en 
+############################################################################################################################   
+#%% Histogramme répartition élèves selon nombre d'XP dans chaque thème  ####################################################
+############################################################################################################################ 
 def theme1():    
-    L1 = [row[0] for row in T]
+    L1 = [row[0] for row in T] #Récupère la première colonne de T dans la liste L1 correspondant aux notes du 1er thème
     xmin = 0
     xmax = 50
     ymin=0
@@ -377,10 +376,6 @@ def theme4():
 
 #Histogramme thèmes
     
-
-
-
-
 
 
 
