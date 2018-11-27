@@ -11,16 +11,15 @@ import matplotlib as plt
 
 
 def stop():
-    a=str(input("Souhaitez-vous continuer ? Oui : o, Non : "))
+    a=str(input("Souhaitez-vous continuer ? Oui : o, Non : n"))
     if a == "o" :
         pass
     else : 
         sys.exit(0) 
 
 
-
 print("Bonjour! Bienvenue sur notre plateforme interactive !")
-a = str(input("Pour bien commencer, veuillez cliquer sur 'p' si vous connaissez déjà les fonctions existentes, sinon tapez 'c' :"))
+a = str(input("Pour bien commencer, veuillez cliquer sur 'p' si vous ne connaissez pas les fonctions existantes, sinon tapez 'c' :"))
 if a == "c" :
     pass
 elif a == "P" :
@@ -184,15 +183,10 @@ def print_oui_ou_non(name,T):
 
 def oui_ou_non_tous(P,T):
     r = []
-    for i in range (len(l)):
-        if oui_ou_non(names[i],l):
-            r.append(names[i])
+    for i in range (len(T)):
+        if oui_ou_non(P[i],T):
+            r.append(P[i])    
     return r
-
-
-    
-def print_oui_ou_non_tous(P,T):
-    print(oui_ou_non_tous(P,T))
     stop()
 
 ############################################################################################################################
@@ -232,31 +226,31 @@ def moy_eleve(name,T,c):  #e : numéro de ligne du tableau et c : Coefficient ic
 ############################################################################################################################ 
 
 AA = [0,3,8,16,25,36,48,62,78,94,112,131,151,172,194,218,243,267,294,321,350]
-#BB = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+BB = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 
 AAsur450 = [9/7*e for e in AA]
 
 
 
-def indexmin(l,v):
+def indexmin(AAsur450,xp):
     i = 0
-    while v > l[i]:
+    while xp > T[int(AAsur450)] :
         i += 1
-        # if i > len(l) : error
+        # if i > len(AAsur450) : error
     return i - 1
 #print(indexmin(AAsur450,23))
 
 
-def arrondir(v,n):
+def arrondir(xp,n):
     # arrondi a n chifres apres la virgule...
-    return int(v*10**n)/10**n
+    return int(xp*10**n)/10**n
 
 #convertit le nombre d'XP en une note sur 20 arrondi à 2 chiffres après la virgule
-def note(xp,tab):
-    m1 = indexmin(tab,xp)
+def note(xp,AAsur450):
+    m1 = indexmin(AAsur450,xp)
     m2 = m1 + 1
-    xp1 = tab[m1]
-    xp2 = tab[m2]
+    xp1 = AAsur450[m1]
+    xp2 = AAsur450[m2]
     dm = 1
     dxp = xp2 - xp1
     a = dm/dxp
@@ -265,13 +259,17 @@ def note(xp,tab):
     return arrondir(m,2)
 
 
-#affiche la courbe plallier/note sur 20
+#affiche la courbe pallier/note sur 20
 def courbe_nbXP_note20(plafond): 
-    x=np.linspace(0,plafond+30,10)
+    x = np.linspace(0,plafond+30,10)
     plt.plot(AA,BB,"+")
     plt.ylabel('Nombre de XP')
     plt.xlabel("Note sur 20")
     plt.show()
+
+tabsommexp = [sum(c[:-1]) for c in maj_tout(T,maxs)]
+notes = [note(xp,AAsur450) for xp in tabsommexp]
+
 
 #affiche un graphique avec un nuage de points (élèves ayant au dessus de la moyenne et en dessous)
 def notes_sur_20():
@@ -280,7 +278,19 @@ def notes_sur_20():
     notes.sort()
     plt.plot([0,100],[10,10],'-')
     plt.plot(range(len(notes)),notes,'+')
-    plt.show()
+    plt.show() 
+ 
+    
+"""#convertit les notes XP en note 20
+def convertion_notes_item(T,n) :
+    AA = [0,3,8,16,25,36,48,62,78,94,112,131,151,172,194,218,243,267,294,321,350]
+    AAsur450 = [(n/350)*e for e in AA]
+    t = []
+    for i in range(len(T[0])):
+        np = note(T[i,0],AAsur450)
+        t.append(nf)
+    return t
+"""
     
 
 #Affiche un camembert des élèves au-dessus de la moyenne et en dessous)
