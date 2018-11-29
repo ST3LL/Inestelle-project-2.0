@@ -67,8 +67,8 @@ maxs = [50,100,100,200]
 
 
 def maj(T,o,n):
-    for i in range (len(T)): #pour tous les i appartenant Ã  l'intervalle [nombre d'Ã©lÃ©ments du tableau T]
-    #si l'Ã©lÃ©ment est supÃ©rieur Ã  50, alors cet Ã©lÃ©ment prend comme valeur 50   
+    for i in range (len(T)): #pour tous les i appartenant à  l'intervalle [nombre d'éléments du tableau T]
+    #si l'élément est supérieur à  50, alors cet élément prend comme valeur 50   
         if T[i,n] > o[n] : 
             T[i,n]= o[n] 
     return T
@@ -118,11 +118,13 @@ P = ["Jean","Pierre","Michel","Andre","Philippe","Rene","Louis","Alain",\
      "Aurelie","Laurence","Michele","Cecile","Therese","Colette","Virginie"]
 
 """
-name = input("Entrez le nom de l'eleve dont vous voulez connaitre les notes : \n") #Association d'un eleve a ses notes d'UE. Merci Philippe :)
+name = input("Entrez le nom de l'eleve dont vous voulez connaitre les notes : \n") 
+                                    #Association d'un eleve a ses notes d'UE. Merci Philippe :)
 rang = -1
 if name in P:
     rang = P.index(name)
-    print(name,"a obtenu les notes",T[rang]) #Enlever la derniere colonne et ajouter des lignes pour savoir si l'eleve a valide son UE
+    print(name,"a obtenu les notes",T[rang]) 
+            #Enlever la derniere colonne et ajouter des lignes pour savoir si l'eleve a valide son UE
 else:
     print("Vous ne connaissez pas vos eleves ? :( Entrez le nom d'un de vos eleves")
  """   
@@ -189,13 +191,6 @@ def oui_ou_non_tous(P,T):
     return r
     stop()
 
-############################################################################################################################
-#%% Attribution de chaque ligne de notes a un eleve ########################################################################
-############################################################################################################################
-#moyennes = np.mean(T,0)[:4] #0 : Traitement des valeurs en ligne pour chaque colonne.
-                                    #Garde les 4 premieres valeurs
-
-    
 
 ############################################################################################################################
 #%% Moyenne pour un theme colonne n ########################################################################################
@@ -292,11 +287,12 @@ def convertion_notes_item(T,n) :
     return t
 """
     
-
-#Affiche un camembert des élèves au-dessus de la moyenne et en dessous)
+############################################################################################################################   
+#%% Affiche un camembert des élèves au-dessus de la moyenne et en dessous  #################################################
+############################################################################################################################
 def camembertNotes():
-    labels = 'Supérieur à 20', 'Inférieur à 20'
-    sizes = [90,10]
+    labels = 'Supérieur à 10', 'Inférieur à 10'
+    sizes = [90,10] #90% des élèves ont au dessus de 10 et 10% en dessous.
     explode = (0, 0.3)  # Met en exergue les 10% en dessous de la moyenne
     
     fig, camembert = plt.subplots()
@@ -382,14 +378,5 @@ def theme4():
     hist_xp.set_title("Répartition des élèves selon leur nombre d'XP au thème 4")
     
     plt.show()
-
-
-#Histogramme thèmes
-    
-
-
-
-
-
 
 
