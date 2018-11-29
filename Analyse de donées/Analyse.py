@@ -43,8 +43,8 @@ T = np.array(your_list).astype(np.float) #transforme tous les elements du tablea
 #%% Programme permettant de mettre les notes superieures au plafond ########################################################
 ############################################################################################################################
 """
-for i in range (len(T)): #pour tous les i appartenant aÂ  l'intervalle [nombre d'elements du tableau T]
-#si l'element est superieur aÂ  50, alors cet element prend comme valeur 50   
+for i in range (len(T)): #pour tous les i appartenant a  l'intervalle [nombre d'elements du tableau T]
+#si l'element est superieur a  50, alors cet element prend comme valeur 50   
     if T[i,0] > 50 : 
         T[i,0]=50   
 
@@ -67,8 +67,8 @@ maxs = [50,100,100,200]
 
 
 def maj(T,o,n):
-    for i in range (len(T)): #pour tous les i appartenant à  l'intervalle [nombre d'éléments du tableau T]
-    #si l'élément est supérieur à  50, alors cet élément prend comme valeur 50   
+    for i in range (len(T)): #pour tous les i appartenant a  l'intervalle [nombre d'elements du tableau T]
+    #si l'element est superieur a  50, alors cet element prend comme valeur 50   
         if T[i,n] > o[n] : 
             T[i,n]= o[n] 
     return T
