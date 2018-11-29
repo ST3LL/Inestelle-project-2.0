@@ -11,7 +11,8 @@ Created on Thu Nov 29 22:34:00 2018
 import csv
 import numpy as np
 import sys
-import matplotlib as plt
+import matplotlib.pyplot as plt
+
 
 
 def stop(): #fonction permettant de stopper ou non 
@@ -313,8 +314,9 @@ def camembertNotes():
 ############################################################################################################################   
 #%% Histogramme répartition élèves selon nombre d'XP dans chaque thème  ####################################################
 ############################################################################################################################ 
-def theme1():    
-    L1 = [row[0] for row in T] #Récupère la première colonne de T dans la liste L1 correspondant aux notes du 1er thème
+"""def theme1():    
+    L1 = [row[0] for row in T] #Récupère la première colonne de T dans la liste L1 
+                                #correspondant aux notes du 1er thème
     xmin = 0
     xmax = 50
     ymin=0
@@ -373,7 +375,7 @@ def theme3():
 def theme4():    
     L4 = [row[3] for row in T]
     xmin = 0
-    xmax = 200
+    xmax = 80
     ymin=0
     ymax=20
     
@@ -388,4 +390,28 @@ def theme4():
     
     plt.show()
 
+"""
 
+def theme(): #Fonction regroupant les 4 en optimisant ! :D
+    L = [0,1,2,3]
+    xmin = 0
+    XMAX = [55,100,100,80]
+    ymin = 0
+    YMAX = [25,20,25,20]
+    for i in L :
+        L1 = [row[i] for row in T]
+        xmax = XMAX[i]
+        ymax = YMAX[i]
+        
+        fig, hist_xp = plt.subplots()
+        
+        plt.hist(L1)
+        hist_xp.set_xlim(xmin,xmax)
+        hist_xp.set_ylim(ymin,ymax)
+        hist_xp.set_xlabel("Nombre d'XP du thème")
+        hist_xp.set_ylabel("Nombre d'élèves")
+        hist_xp.set_title("Répartition des élèves selon leur nombre d'XP du thème")
+        
+        plt.show()
+        
+        i+=1
