@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
-#A faire : moyenne de chaque gens
+"""
+Created on Thu Nov 29 22:34:00 2018
+
+@author: Inestelle
+"""
 
 ############################################################################################################################
 #%% importation de module pour realiser le projet ##########################################################################
@@ -10,20 +14,21 @@ import sys
 import matplotlib as plt
 
 
-def stop():
-    a=str(input("Souhaitez-vous continuer ? Oui : o, Non : n"))
-    if a == "o" :
+def stop(): #fonction permettant de stopper ou non 
+    a = str(input("Souhaitez-vous continuer ? Oui : o, Non : n :"))
+    if a == "o" : #si l'utilisateur tape "o", les fonctions continuent
         pass
-    else : 
+    else : #sinon ça ferme la fenêtre
         sys.exit(0) 
 
 
 print("Bonjour! Bienvenue sur notre plateforme interactive !")
 a = str(input("Pour bien commencer, veuillez cliquer sur 'p' si vous ne connaissez pas les fonctions existantes, sinon tapez 'c' :"))
-if a == "c" :
+if a == "c" : #si l'utilisateur tape "c", les fonctions continuent
     pass
-elif a == "P" :
+elif a == "P" : #et si l'utilisateur tape "p"
     print ("Voici les fonctions existantes : blabla")
+    pass
 stop()
 
 
@@ -31,9 +36,9 @@ stop()
 ############################################################################################################################
 #%% Programme permettant de mettre les notes superieures au plafond ########################################################
 ############################################################################################################################
-with open('donnees_projet', 'r') as f:
-    reader = csv.reader(f)
-    your_list = list(reader)
+with open('donnees_projet', 'r') as f: #ourvir le fichier qui se trouve au meme emplacement que ce fichier .py
+    reader = csv.reader(f) #retourne un objet "lecteur" qui va iterer sur les lignes dans le fichier csv donne. 
+    your_list = list(reader) #transforme en liste
 
 entete = your_list.pop(0) #supprime la premiere ligne d'entete du tableau
 T = np.array(your_list).astype(np.float) #transforme tous les elements du tableau (string) en float
@@ -63,12 +68,13 @@ for i in range (len(T)):
 #print(T)   
 """
 
-maxs = [50,100,100,200]
+o = [50,100,100,200] #liste des differents plafonds de notes
 
 
-def maj(T,o,n):
-    for i in range (len(T)): #pour tous les i appartenant a  l'intervalle [nombre d'elements du tableau T]
-    #si l'element est superieur a  50, alors cet element prend comme valeur 50   
+def maj(T,o,n): #fonction mettant toutes les notes superieures au plafond au plafond (pour une colonne)
+    #T la liste, o liste des plafonds, n le numéro de la colonne
+    for i in range (len(T)): #pour tous les i appartenant a l'intervalle [nombre d'emplacement du tableau T]
+    #si l'emplacmeent est superieur a 50, alors cet element prend comme valeur le plafond   
         if T[i,n] > o[n] : 
             T[i,n]= o[n] 
     return T
@@ -76,7 +82,8 @@ def maj(T,o,n):
     
 
     
-def maj_tout(T,o):
+def maj_tout(T,o): #fonction mettant toutes les notes superieures au plafond au plafond pour tout le tableau
+    #T la liste, o liste des plafonds, n le numéro de la colonne
     n=0
     while n<len(o):
         T=maj(T,o,n)
@@ -87,15 +94,15 @@ def maj_tout(T,o):
 ############################################################################################################################
 #%% fonction permettant de terminer le major de chaque theme ###############################################################
 ############################################################################################################################
-def major (l,n):
-    a_trier = []
-    for liste in l :
-        a_trier.append([liste[n]])
-    for i in range (len(a_trier)):
-        a_trier[i].append(i)
-    a_trier = sorted(a_trier)
-    a_trier = a_trier[::-1]
-    print(a_trier[1])
+def major (T,n): #fonction dtéerminant le major de la classe
+    tt = []
+    for i in T :
+        tt.append([i[n]]) #ajoute un element en fin de liste
+    for j in range (len(tt)):
+        tt[j].append(j) #ajoute un element en fin de liste
+    tt = sorted(tt) #renvoie une nouvelle liste tt triee
+    tt = tt[::-1] #inverse la liste (croissante --> decroissante) 
+    print(tt[1])
     stop()
 
 
@@ -132,22 +139,22 @@ else:
  
 def nametorang(name):
     if name in P:
-        return P.index(name)
+        return P.index(name) #retourne le rang du prenom de l'etudiant
     else:
         return "Erreur"
         
-  
+"""  
 #pas fini
 def qui(T,P):
     for i in range (len(T)):
         ihih = P[i]
         eheh = T.index(ihih)
     return eheh
-            
+"""            
 
  
-def fiche_eleve(name,T,c):
-    if nametorang(name) != "Erreur":
+def fiche_eleve(name,T,c): #création d'une fiche élève avec son prenom, son rang, ses notes, sa moyenne de l'UE
+    if nametorang(name) != "Erreur": #verification si prenom present dans la liste
         rang = nametorang(name)
         moyenne = moy_eleve(name,T,c)
         print(name, rang, " : Les notes de cette eleve sont ",T[rang],", sa moyenne est de ",moyenne)
@@ -160,10 +167,10 @@ def fiche_eleve(name,T,c):
 #%% Quels élèves ont eu leur semestre ###################################################################################### 
 ############################################################################################################################     
     
-def oui_ou_non(name,T):
-    if nametorang(name) != "Erreur":
+def oui_ou_non(name,T): #savoir si l'etudiant a son UE ou non
+    if nametorang(name) != "Erreur": #verification si prenom present dans la liste
         rang = nametorang(name)
-        if T[rang,4] == 1.0:
+        if T[rang,4] == 1.0: #si l'etudiant a son UE, 1.0
             return True
         else :
             return False
@@ -172,7 +179,7 @@ def oui_ou_non(name,T):
  
 
        
-def print_oui_ou_non(name,T):
+def print_oui_ou_non(name,T): #affichage de la fonction precedente
     if oui_ou_non(name,T) == True :
         print(name, "a eu son semestre !")
     elif oui_ou_non(name,T) == False :
@@ -183,12 +190,16 @@ def print_oui_ou_non(name,T):
 
 
 
-def oui_ou_non_tous(P,T):
+def oui_ou_non_tous(P,T): #affichage de tous les étudiants ayant leur UE et ceux ne l'ayant pas eu !
     r = []
+    g = []
     for i in range (len(T)):
         if oui_ou_non(P[i],T):
-            r.append(P[i])    
+            r.append(P[i]) 
+        else: 
+            g.append(P[i])
     return r
+    return g
     stop()
 
 
@@ -223,25 +234,23 @@ def moy_eleve(name,T,c):  #e : numéro de ligne du tableau et c : Coefficient ic
 AA = [0,3,8,16,25,36,48,62,78,94,112,131,151,172,194,218,243,267,294,321,350]
 BB = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 
-AAsur450 = [9/7*e for e in AA]
-
+AAsur450 = [9/7*e for e in AA] #liste AA convertissant les XP sur 450 (x un facteur !)
 
 
 def indexmin(AAsur450,xp):
     i = 0
-    while xp > T[int(AAsur450)] :
+    while xp > AAsur450[i] :
         i += 1
         # if i > len(AAsur450) : error
     return i - 1
 #print(indexmin(AAsur450,23))
 
 
-def arrondir(xp,n):
-    # arrondi a n chifres apres la virgule...
+def arrondir(xp,n): # arrondi a n chifres apres la virgule...
     return int(xp*10**n)/10**n
 
-#convertit le nombre d'XP en une note sur 20 arrondi à 2 chiffres après la virgule
-def note(xp,AAsur450):
+
+def note(xp,AAsur450): #convertit le nombre d'XP en une note sur 20 arrondi à 2 chiffres après la virgule
     m1 = indexmin(AAsur450,xp)
     m2 = m1 + 1
     xp1 = AAsur450[m1]
@@ -254,26 +263,26 @@ def note(xp,AAsur450):
     return arrondir(m,2)
 
 
-#affiche la courbe pallier/note sur 20
-def courbe_nbXP_note20(plafond): 
+def courbe_nbXP_note20(plafond): #affiche la courbe pallier/note sur 20
     x = np.linspace(0,plafond+30,10)
     plt.plot(AA,BB,"+")
     plt.ylabel('Nombre de XP')
-    plt.xlabel("Note sur 20")
+    plt.xlabel('Note sur 20')
     plt.show()
 
-tabsommexp = [sum(c[:-1]) for c in maj_tout(T,maxs)]
+tabsommexp = [sum(c[:-1]) for c in maj_tout(T,o)]
 notes = [note(xp,AAsur450) for xp in tabsommexp]
 
 
 #affiche un graphique avec un nuage de points (élèves ayant au dessus de la moyenne et en dessous)
-def notes_sur_20():
-    tabsommexp = [sum(c[:-1]) for c in maj_tout(T,maxs)]
+def notes_sur_20(): #affiche un graphique avec un nuage de points (élèves ayant au dessus de la moyenne et en dessous)
+    tabsommexp = [sum(c[:-1]) for c in maj_tout(T,o)]
     notes = [note(xp,AAsur450) for xp in tabsommexp]
     notes.sort()
     plt.plot([0,100],[10,10],'-')
     plt.plot(range(len(notes)),notes,'+')
     plt.show() 
+  
  
     
 """#convertit les notes XP en note 20
