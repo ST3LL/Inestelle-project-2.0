@@ -274,7 +274,8 @@ def courbe_nbXP_note20(plafond): #affiche la courbe pallier/note sur 20
     plt.show()
     
     
-tabsommexp = [sum(c[:-1]) for c in maj_tout(T,o)] #fait la somme de tous les éléments du tableau avec les notes qui ne peuvent pas être supérieures au plafond
+tabsommexp = [sum(c[:-1]) for c in maj_tout(T,o)] #fait la somme de tous les éléments du tableau 
+                                        #avec les notes qui ne peuvent pas être supérieures au plafond
 notes = [note(xp,AAsur450) for xp in tabsommexp] #convertit le somme de ces xp en note sur 20
 
 
@@ -289,8 +290,10 @@ def note_sur_20_eleve(T,P,name):
     stop()
     
     
-def notes_sur_20(): #affiche un graphique avec un nuage de points (élèves ayant au dessus de la moyenne et en dessous)
-    tabsommexp = [sum(c[:-1]) for c in maj_tout(T,o)] #fait la somme de tous les éléments du tableau avec les notes qui ne peuvent pas être supérieures au plafond
+def notes_sur_20(): #affiche un graphique avec un nuage de points 
+                    #(élèves ayant au dessus de la moyenne et en dessous)
+    tabsommexp = [sum(c[:-1]) for c in maj_tout(T,o)] #fait la somme de tous les éléments du tableau 
+                                        #avec les notes qui ne peuvent pas être supérieures au plafond
     notes = [note(xp,AAsur450) for xp in tabsommexp] #convertit le somme de ces xp en note sur 20
     notes2 = entier(notes) #ne prend que la partie entière de ces notes
     compteur_sup = 0
