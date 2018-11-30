@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Nov 30 07:34:00 2018
+Created on Thu Nov 30 23:08:00 2018
 
 @author: Inestelle
 """
@@ -16,11 +16,28 @@ import matplotlib.pyplot as plt
 
 
 def stop(): #fonction permettant de stopper ou non 
-    a = str(input("Souhaitez-vous continuer ? Oui : o, Non : n :"))
+    a = str(input("Souhaitez-vous continuer : o ou n ? Ou revoir toutes les fonctions disponibles : p ?"))
     if a == "o" : #si l'utilisateur tape "o", les fonctions continuent
+        pass
+    elif a == "p" :
+        print("Voici les fonctions existantes :")
+        print("maj_tout(T,o) : T la liste des données et o la liste des plafonds. Permet de convertir toutes les notes supérieures au plafond, au plafond.")
+        print("major(T,n) : T la liste des données.")
+        print("print_oui_ou_non(name,T) : name le prenom de l'etudiant, T la liste des données. Permet de savoir quel élève a eu son UE.")
+        print("moy_colonne(n) : n la colonne. Permet d'avoir la moyenne d'un thème.")
+        print("moy_eleve(name,T,c) : name le prenom de l'etudiant, T la liste des données, c le coefficient total. Permet d'obtenir la moyenne (en xp) de son UE.")
+        print("note(xp,AAsur450) : xp le nombre d'xp, AAsur450 la liste des paliers des xp correspondant à une note sur 20. Permet d'obtenir la conversion de points xp en note sur 20.")
+        print("courbe_nbXP_note20(plafond) : plafond le max d'xp. Obtention d'une courbe nXP/notre20.")
+        print("note_sur_20_eleve(T,P,name) : name le prenom de l'etudiant, T la liste des données, c le coefficient total. Permet d'obtenir la note sur 20 d'un élève.")
+        print("notes_sur_20() :  ")
+        print("graph_notes_sur_20() :  ")
+        print("fiche_eleve(name,T,c): name le prenom de l'etudiant, T la liste des données, c le coefficient total. Obtention d'une fiche complête d'un etudiant.")
+        print("camembertNotes()")
+        print("theme(): permet d'afficher des histogrammes !")
         pass
     else : #sinon ça ferme la fenêtre
         sys.exit(0) 
+
 
 
 print("Bonjour! Bienvenue sur notre plateforme interactive !")
@@ -41,9 +58,10 @@ elif a == "p" : #et si l'utilisateur tape "p"
     print("graph_notes_sur_20() :  ")
     print("fiche_eleve(name,T,c): name le prenom de l'etudiant, T la liste des données, c le coefficient total. Obtention d'une fiche complête d'un etudiant.")
     print("camembertNotes()")
-    print("theme(): ")
+    print("theme(): permet d'afficher des histogrammes !")
     pass
 stop()
+
 
 
 
@@ -108,7 +126,9 @@ def maj_tout(T,o): #fonction mettant toutes les notes superieures au plafond au 
 ############################################################################################################################
 #%% fonction permettant de terminer le major de chaque theme ###############################################################
 ############################################################################################################################
-def major (T,n): #fonction dtéerminant le major de la classe
+
+#Nos remerciements vont au groupe de Quentin, Matthieu et Mickaël, pour leur aide à la réalisation de cette fonction
+def major (T,n): #fonction determinant le major de la classe
     tt = []
     for i in T :
         tt.append([i[n]]) #ajoute un element en fin de liste
@@ -171,6 +191,7 @@ def oui_ou_non(name,T): #savoir si l'etudiant a son UE ou non
             return False
     else:
         return None
+    stop()
  
 
        
@@ -191,10 +212,7 @@ def oui_ou_non_tous(P,T): #affichage de tous les étudiants ayant leur UE et ceu
     for i in range (len(T)):
         if oui_ou_non(P[i],T):
             r.append(P[i]) 
-        else: 
-            g.append(P[i])
     return r
-    return g
     stop()
 
 
@@ -264,7 +282,7 @@ def note(xp,AAsur450): #convertit le nombre d'XP en une note sur 20 arrondi à 2
     b = m1 - xp1*a
     m = a*xp + b
     return arrondir(m,2)
-
+    stop()
 
 def courbe_nbXP_note20(plafond): #affiche la courbe pallier/note sur 20
     x = np.linspace(0,plafond+30,10)
@@ -272,10 +290,10 @@ def courbe_nbXP_note20(plafond): #affiche la courbe pallier/note sur 20
     plt.ylabel('Nombre de XP')
     plt.xlabel('Note sur 20')
     plt.show()
+    stop()
     
     
-tabsommexp = [sum(c[:-1]) for c in maj_tout(T,o)] #fait la somme de tous les éléments du tableau 
-                                        #avec les notes qui ne peuvent pas être supérieures au plafond
+tabsommexp = [sum(c[:-1]) for c in maj_tout(T,o)] #fait la somme de tous les éléments du tableau avec les notes qui ne peuvent pas être supérieures au plafond
 notes = [note(xp,AAsur450) for xp in tabsommexp] #convertit le somme de ces xp en note sur 20
 
 
@@ -290,10 +308,8 @@ def note_sur_20_eleve(T,P,name):
     stop()
     
     
-def notes_sur_20(): #affiche un graphique avec un nuage de points 
-                    #(élèves ayant au dessus de la moyenne et en dessous)
-    tabsommexp = [sum(c[:-1]) for c in maj_tout(T,o)] #fait la somme de tous les éléments du tableau 
-                                        #avec les notes qui ne peuvent pas être supérieures au plafond
+def notes_sur_20(): #affiche un graphique avec un nuage de points (élèves ayant au dessus de la moyenne et en dessous)
+    tabsommexp = [sum(c[:-1]) for c in maj_tout(T,o)] #fait la somme de tous les éléments du tableau avec les notes qui ne peuvent pas être supérieures au plafond
     notes = [note(xp,AAsur450) for xp in tabsommexp] #convertit le somme de ces xp en note sur 20
     notes2 = entier(notes) #ne prend que la partie entière de ces notes
     compteur_sup = 0
@@ -304,7 +320,8 @@ def notes_sur_20(): #affiche un graphique avec un nuage de points
         else :
             compteur_inf += 1
     return compteur_sup,compteur_inf
-  
+    stop()
+    
  
 def graph_notes_sur_20():
     notes_sur_20()
@@ -312,18 +329,8 @@ def graph_notes_sur_20():
     plt.plot([0,100],[10,10],'-')
     plt.plot(range(len(notes)),notes,'+')
     plt.show() 
-    
-    
-    
-def fiche_eleve(name,T,c): #création d'une fiche élève avec son prenom, son rang, ses notes, sa moyenne de l'UE
-    if nametorang(name) != "Erreur": #verification si prenom present dans la liste
-        rang = nametorang(name)
-        moyenne = moy_eleve(name,T,c)
-        note = note_sur_20_eleve(T,P,name)
-        print(name, rang, " : Les notes de cette eleve sont ",T[rang],", sa moyenne est de ",moyenne, "avec une note de ",note,"sur 20")
-    else:
-        print("Erreur")
     stop()
+    
     
 """#convertit les notes XP en note 20
 def convertion_notes_item(T,n) :
@@ -335,6 +342,18 @@ def convertion_notes_item(T,n) :
         t.append(nf)
     return t
 """
+  
+    
+def fiche_eleve(name,T,c): #création d'une fiche élève avec son prenom, son rang, ses notes, sa moyenne de l'UE
+    if nametorang(name) != "Erreur": #verification si prenom present dans la liste
+        rang = nametorang(name)
+        moyenne = moy_eleve(name,T,c)
+        note = note_sur_20_eleve(T,P,name)
+        print(name, rang, " : Les notes de cette eleve sont ",T[rang],", sa moyenne est de ",moyenne, "avec une note de ",note,"sur 20")
+    else:
+        print("Erreur")
+    stop()
+    
     
 ############################################################################################################################   
 #%% Affiche un camembert des élèves au-dessus de la moyenne et en dessous  #################################################
@@ -349,7 +368,8 @@ def camembertNotes():
     camembert.axis('equal') #Permet d'avoir un beau camembert circulaire. =D
 
     plt.show()
-
+    stop()
+    
 ############################################################################################################################   
 #%% Histogramme répartition élèves selon nombre d'XP dans chaque thème  ####################################################
 ############################################################################################################################ 
@@ -371,7 +391,7 @@ def camembertNotes():
     hist_xp.set_title("Répartition des élèves selon leur nombre d'XP au thème 1")
     
     plt.show()
-    
+    stop()
 
 def theme2():    
     L2 = [row[1] for row in T]
@@ -390,7 +410,7 @@ def theme2():
     hist_xp.set_title("Répartition des élèves selon leur nombre d'XP au thème 2")
     
     plt.show()
-    
+    stop()
     
 def theme3():    
     L3 = [row[2] for row in T]
@@ -409,7 +429,7 @@ def theme3():
     hist_xp.set_title("Répartition des élèves selon leur nombre d'XP au thème 3")
     
     plt.show()
-    
+    stop()
     
 def theme4():    
     L4 = [row[3] for row in T]
@@ -428,7 +448,7 @@ def theme4():
     hist_xp.set_title("Répartition des élèves selon leur nombre d'XP au thème 4")
     
     plt.show()
-
+    stop()
 """
 
 def theme(): #Fonction regroupant les 4 en optimisant ! :D
@@ -454,3 +474,4 @@ def theme(): #Fonction regroupant les 4 en optimisant ! :D
         plt.show()
         
         i+=1
+        stop()
