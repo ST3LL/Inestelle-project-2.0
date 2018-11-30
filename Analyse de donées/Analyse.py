@@ -297,7 +297,7 @@ def note_sur_20_eleve(T,P,name):
     stop()
     
     
-    def notes_sur_20(): #affiche un graphique avec un nuage de points (élèves ayant au dessus de la moyenne et en dessous)
+def notes_sur_20(): #affiche un graphique avec un nuage de points (élèves ayant au dessus de la moyenne et en dessous)
     tabsommexp = [sum(c[:-1]) for c in maj_tout(T,o)] #fait la somme de tous les éléments du tableau avec les notes qui ne peuvent pas être supérieures au plafond
     notes = [note(xp,AAsur450) for xp in tabsommexp] #convertit le somme de ces xp en note sur 20
     notes2 = entier(notes) #ne prend que la partie entière de ces notes
@@ -346,7 +346,7 @@ def convertion_notes_item(T,n) :
 ############################################################################################################################
 def camembertNotes():
     labels = 'Supérieur à 10', 'Inférieur à 10'
-    sizes = list(notes_sur_20()) #liste des bornes supérieure et inférieure (voir la fonction notes_sur_20())
+    sizes = list(notes_sur_20()) #liste des bornes sup et inf (cf fonction notes_sur_20)
     explode = (0, 0.3)  # Met en exergue les 10% en dessous de la moyenne
     
     fig, camembert = plt.subplots()
