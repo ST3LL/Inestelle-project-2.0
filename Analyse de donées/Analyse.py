@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Nov 29 22:34:00 2018
+Created on Thu Nov 30 07:34:00 2018
 
 @author: Inestelle
 """
@@ -27,8 +27,21 @@ print("Bonjour! Bienvenue sur notre plateforme interactive !")
 a = str(input("Pour bien commencer, veuillez cliquer sur 'p' si vous ne connaissez pas les fonctions existantes, sinon tapez 'c' :"))
 if a == "c" : #si l'utilisateur tape "c", les fonctions continuent
     pass
-elif a == "P" : #et si l'utilisateur tape "p"
-    print ("Voici les fonctions existantes : blabla")
+elif a == "p" : #et si l'utilisateur tape "p"
+    print("Voici les fonctions existantes :")
+    print("maj_tout(T,o) : T la liste des données et o la liste des plafonds. Permet de convertir toutes les notes supérieures au plafond, au plafond.")
+    print("major(T,n) : T la liste des données.")
+    print("print_oui_ou_non(name,T) : name le prenom de l'etudiant, T la liste des données. Permet de savoir quel élève a eu son UE.")
+    print("moy_colonne(n) : n la colonne. Permet d'avoir la moyenne d'un thème.")
+    print("moy_eleve(name,T,c) : name le prenom de l'etudiant, T la liste des données, c le coefficient total. Permet d'obtenir la moyenne (en xp) de son UE.")
+    print("note(xp,AAsur450) : xp le nombre d'xp, AAsur450 la liste des paliers des xp correspondant à une note sur 20. Permet d'obtenir la conversion de points xp en note sur 20.")
+    print("courbe_nbXP_note20(plafond) : plafond le max d'xp. Obtention d'une courbe nXP/notre20.")
+    print("note_sur_20_eleve(T,P,name) : name le prenom de l'etudiant, T la liste des données, c le coefficient total. Permet d'obtenir la note sur 20 d'un élève.")
+    print("notes_sur_20() :  ")
+    print("graph_notes_sur_20() :  ")
+    print("fiche_eleve(name,T,c): name le prenom de l'etudiant, T la liste des données, c le coefficient total. Obtention d'une fiche complête d'un etudiant.")
+    print("camembertNotes()")
+    print("theme(): ")
     pass
 stop()
 
@@ -151,18 +164,7 @@ def qui(T,P):
         ihih = P[i]
         eheh = T.index(ihih)
     return eheh
-"""            
-
- 
-def fiche_eleve(name,T,c): #création d'une fiche élève avec son prenom, son rang, ses notes, sa moyenne de l'UE
-    if nametorang(name) != "Erreur": #verification si prenom present dans la liste
-        rang = nametorang(name)
-        moyenne = moy_eleve(name,T,c)
-        print(name, rang, " : Les notes de cette eleve sont ",T[rang],", sa moyenne est de ",moyenne)
-    else:
-        print("Erreur")
-    stop()
-  
+"""              
     
 ############################################################################################################################
 #%% Quels élèves ont eu leur semestre ###################################################################################### 
@@ -251,6 +253,14 @@ def arrondir(xp,n): # arrondi a n chifres apres la virgule...
     return int(xp*10**n)/10**n
 
 
+def entier(notes): #prendre la partie entière de toutes les notes qui sont float de base
+    notes2 = []
+    for i in range(len(notes)):
+        x=notes[i]
+        notes2.append(int(x))
+    return notes2
+
+
 def note(xp,AAsur450): #convertit le nombre d'XP en une note sur 20 arrondi à 2 chiffres après la virgule
     m1 = indexmin(AAsur450,xp)
     m2 = m1 + 1
@@ -270,21 +280,55 @@ def courbe_nbXP_note20(plafond): #affiche la courbe pallier/note sur 20
     plt.ylabel('Nombre de XP')
     plt.xlabel('Note sur 20')
     plt.show()
+    
+    
+tabsommexp = [sum(c[:-1]) for c in maj_tout(T,o)] #fait la somme de tous les éléments du tableau avec les notes qui ne peuvent pas être supérieures au plafond
+notes = [note(xp,AAsur450) for xp in tabsommexp] #convertit le somme de ces xp en note sur 20
 
-tabsommexp = [sum(c[:-1]) for c in maj_tout(T,o)]
-notes = [note(xp,AAsur450) for xp in tabsommexp]
 
-
-#affiche un graphique avec un nuage de points (élèves ayant au dessus de la moyenne et en dessous)
-def notes_sur_20(): #affiche un graphique avec un nuage de points (élèves ayant au dessus de la moyenne et en dessous)
-    tabsommexp = [sum(c[:-1]) for c in maj_tout(T,o)]
-    notes = [note(xp,AAsur450) for xp in tabsommexp]
+def note_sur_20_eleve(T,P,name):
+    if nametorang(name) != "Erreur": #verification si prenom present dans la liste
+        rang = nametorang(name)
+        tabsommexp = [sum(T[rang,:-1])] #fait la somme de la ligne du rang correspondant
+        notes = [note(xp,AAsur450) for xp in tabsommexp] #convertit le somme de ces xp en note sur 20
+        return notes
+    else :
+        return "Erreur"
+    stop()
+    
+    
+    def notes_sur_20(): #affiche un graphique avec un nuage de points (élèves ayant au dessus de la moyenne et en dessous)
+    tabsommexp = [sum(c[:-1]) for c in maj_tout(T,o)] #fait la somme de tous les éléments du tableau avec les notes qui ne peuvent pas être supérieures au plafond
+    notes = [note(xp,AAsur450) for xp in tabsommexp] #convertit le somme de ces xp en note sur 20
+    notes2 = entier(notes) #ne prend que la partie entière de ces notes
+    compteur_sup = 0
+    compteur_inf = 0
+    for nt in notes2 : #compteur eleves sup/egal et inf à 10
+        if nt >= 10 :
+            compteur_sup += 1
+        else :
+            compteur_inf += 1
+    return compteur_sup,compteur_inf
+  
+ 
+def graph_notes_sur_20():
+    notes_sur_20()
     notes.sort()
     plt.plot([0,100],[10,10],'-')
     plt.plot(range(len(notes)),notes,'+')
     plt.show() 
-  
- 
+    
+    
+    
+def fiche_eleve(name,T,c): #création d'une fiche élève avec son prenom, son rang, ses notes, sa moyenne de l'UE
+    if nametorang(name) != "Erreur": #verification si prenom present dans la liste
+        rang = nametorang(name)
+        moyenne = moy_eleve(name,T,c)
+        note = note_sur_20_eleve(T,P,name)
+        print(name, rang, " : Les notes de cette eleve sont ",T[rang],", sa moyenne est de ",moyenne, "avec une note de ",note,"sur 20")
+    else:
+        print("Erreur")
+    stop()
     
 """#convertit les notes XP en note 20
 def convertion_notes_item(T,n) :
@@ -302,7 +346,7 @@ def convertion_notes_item(T,n) :
 ############################################################################################################################
 def camembertNotes():
     labels = 'Supérieur à 10', 'Inférieur à 10'
-    sizes = [90,10] #90% des élèves ont au dessus de 10 et 10% en dessous.
+    sizes = list(notes_sur_20()) #liste des bornes supérieure et inférieure (voir la fonction notes_sur_20())
     explode = (0, 0.3)  # Met en exergue les 10% en dessous de la moyenne
     
     fig, camembert = plt.subplots()
