@@ -13,7 +13,9 @@ import numpy as np
 import sys
 import matplotlib.pyplot as plt
 
-
+############################################################################################################################
+#%% Affichage début code ###################################################################################################
+############################################################################################################################ 
 
 def stop(): #fonction permettant de stopper ou non 
     a = str(input("Souhaitez-vous continuer : o ou n ? Ou revoir toutes les fonctions disponibles : p ?"))
@@ -62,12 +64,10 @@ elif a == "p" : #et si l'utilisateur tape "p"
     pass
 stop()
 
-
-
-
 ############################################################################################################################
-#%% Programme permettant de mettre les notes superieures au plafond ########################################################
+#%% Récupération du fichier ################################################################################################
 ############################################################################################################################
+
 with open('donnees_projet', 'r') as f: #ourvir le fichier qui se trouve au meme emplacement que ce fichier .py
     reader = csv.reader(f) #retourne un objet "lecteur" qui va iterer sur les lignes dans le fichier csv donne. 
     your_list = list(reader) #transforme en liste
@@ -124,7 +124,7 @@ def maj_tout(T,o): #fonction mettant toutes les notes superieures au plafond au 
     stop()
 
 ############################################################################################################################
-#%% fonction permettant de terminer le major de chaque theme ###############################################################
+#%% Fonction permettant de terminer le major de chaque theme ###############################################################
 ############################################################################################################################
 
 #Nos remerciements vont au groupe de Quentin, Matthieu et Mickaël, pour leur aide à la réalisation de cette fonction
@@ -141,8 +141,9 @@ def major (T,n): #fonction determinant le major de la classe
 
 
 ############################################################################################################################
-#%% Attribution de chaque ligne de notes a un eleve######################################################################### 
+#%% Attribution de chaque ligne de notes a un eleve ######################################################################## 
 ############################################################################################################################
+
 P = ["Jean","Pierre","Michel","Andre","Philippe","Rene","Louis","Alain",\
      "Jacques","Bernard","Marcel","Daniel","Roger","Robert","Claude","Paul",\
      "Christian","Henri","Georges","Nicolas","Francois","Patrick","Gerard",\
@@ -179,7 +180,7 @@ def nametorang(name):
         
 
 ############################################################################################################################
-#%% Quels élèves ont eu leur semestre ###################################################################################### 
+#%% Quels élèves ont eu leur semestre ? #################################################################################### 
 ############################################################################################################################     
     
 def oui_ou_non(name,T): #savoir si l'etudiant a son UE ou non
@@ -219,6 +220,7 @@ def oui_ou_non_tous(P,T): #affichage de tous les étudiants ayant leur UE et ceu
 ############################################################################################################################
 #%% Moyenne pour un theme colonne n ########################################################################################
 ############################################################################################################################
+
 def moy_colonne(n):
     moy = np.mean(T,0)[n]
     print("La moyenne de cette UE est de",moy)
@@ -241,7 +243,7 @@ def moy_eleve(name,T,c):  #e : numéro de ligne du tableau et c : Coefficient ic
 
 
 ############################################################################################################################   
-#%% Courbe nb XP <=> note sur 20 ###########################################################################################
+#%% Conversion nb XP <=> note sur 20 #######################################################################################
 ############################################################################################################################ 
 
 AA = [0,3,8,16,25,36,48,62,78,94,112,131,151,172,194,218,243,267,294,321,350]
@@ -343,7 +345,10 @@ def convertion_notes_item(T,n) :
     return t
 """
   
-    
+############################################################################################################################   
+#%% Affiche fiche élève avec prénom, rang, nbXP par thème, moyenne, note finale sur 20 #####################################
+############################################################################################################################    
+
 def fiche_eleve(name,T,c): #création d'une fiche élève avec son prenom, son rang, ses notes, sa moyenne de l'UE
     if nametorang(name) != "Erreur": #verification si prenom present dans la liste
         rang = nametorang(name)
@@ -358,6 +363,7 @@ def fiche_eleve(name,T,c): #création d'une fiche élève avec son prenom, son r
 ############################################################################################################################   
 #%% Affiche un camembert des élèves au-dessus de la moyenne et en dessous  #################################################
 ############################################################################################################################
+
 def camembertNotes():
     labels = 'Supérieur à 10', 'Inférieur à 10'
     sizes = list(notes_sur_20()) #liste des bornes sup et inf (cf fonction notes_sur_20)
@@ -373,6 +379,7 @@ def camembertNotes():
 ############################################################################################################################   
 #%% Histogramme répartition élèves selon nombre d'XP dans chaque thème  ####################################################
 ############################################################################################################################ 
+
 """def theme1():    
     L1 = [row[0] for row in T] #Récupère la première colonne de T dans la liste L1 
                                 #correspondant aux notes du 1er thème
