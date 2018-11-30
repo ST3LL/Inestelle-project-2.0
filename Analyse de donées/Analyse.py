@@ -395,7 +395,7 @@ def theme4():
 def theme(): #Fonction regroupant les 4 en optimisant ! :D
     L = [0,1,2,3]
     xmin = 0
-    XMAX = [55,100,100,80]
+    XMAX = [55,100,100,80] #Choix des axes. Différents en fonction du zoom souhaité pour chaque histo.
     ymin = 0
     YMAX = [25,20,25,20]
     for i in L :
