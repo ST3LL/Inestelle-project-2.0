@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Nov 30 23:08:00 2018
-
+Created on Thu Nov 29 22:34:00 2018
 @author: Inestelle
 """
 
@@ -13,9 +12,6 @@ import numpy as np
 import sys
 import matplotlib.pyplot as plt
 
-############################################################################################################################
-#%% Affichage début code ###################################################################################################
-############################################################################################################################ 
 
 def stop(): #fonction permettant de stopper ou non 
     a = str(input("Souhaitez-vous continuer : o ou n ? Ou revoir toutes les fonctions disponibles : p ?"))
@@ -41,7 +37,6 @@ def stop(): #fonction permettant de stopper ou non
         sys.exit(0) 
 
 
-
 print("Bonjour! Bienvenue sur notre plateforme interactive !")
 a = str(input("Pour bien commencer, veuillez cliquer sur 'p' si vous ne connaissez pas les fonctions existantes, sinon tapez 'c' :"))
 if a == "c" : #si l'utilisateur tape "c", les fonctions continuent
@@ -64,10 +59,11 @@ elif a == "p" : #et si l'utilisateur tape "p"
     pass
 stop()
 
-############################################################################################################################
-#%% Récupération du fichier ################################################################################################
-############################################################################################################################
 
+
+############################################################################################################################
+#%% Récupéation fichier ####################################################################################################
+############################################################################################################################
 with open('donnees_projet', 'r') as f: #ourvir le fichier qui se trouve au meme emplacement que ce fichier .py
     reader = csv.reader(f) #retourne un objet "lecteur" qui va iterer sur les lignes dans le fichier csv donne. 
     your_list = list(reader) #transforme en liste
@@ -80,11 +76,10 @@ T = np.array(your_list).astype(np.float) #transforme tous les elements du tablea
 #%% Programme permettant de mettre les notes superieures au plafond ########################################################
 ############################################################################################################################
 """
-for i in range (len(T)): #pour tous les i appartenant a  l'intervalle [nombre d'elements du tableau T]
-#si l'element est superieur a  50, alors cet element prend comme valeur 50   
+for i in range (len(T)): #pour tous les i appartenant a  l'intervalle [nombre d'elements du tableau T]
+#si l'element est superieur a  50, alors cet element prend comme valeur 50   
     if T[i,0] > 50 : 
         T[i,0]=50   
-
 for i in range (len(T)):
     if T[i,1] > 100 :
         T[i,1]=100
@@ -92,7 +87,6 @@ for i in range (len(T)):
 for i in range (len(T)):
     if T[i,2] > 100 :
         T[i,2]=100
-
 for i in range (len(T)):
     if T[i,3] > 200 :
         T[i,3]=200
@@ -124,7 +118,7 @@ def maj_tout(T,o): #fonction mettant toutes les notes superieures au plafond au 
     stop()
 
 ############################################################################################################################
-#%% Fonction permettant de terminer le major de chaque theme ###############################################################
+#%% fonction permettant de terminer le major de chaque theme ###############################################################
 ############################################################################################################################
 
 #Nos remerciements vont au groupe de Quentin, Matthieu et Mickaël, pour leur aide à la réalisation de cette fonction
@@ -141,9 +135,8 @@ def major (T,n): #fonction determinant le major de la classe
 
 
 ############################################################################################################################
-#%% Attribution de chaque ligne de notes a un eleve ######################################################################## 
+#%% Attribution de chaque ligne de notes a un eleve######################################################################### 
 ############################################################################################################################
-
 P = ["Jean","Pierre","Michel","Andre","Philippe","Rene","Louis","Alain",\
      "Jacques","Bernard","Marcel","Daniel","Roger","Robert","Claude","Paul",\
      "Christian","Henri","Georges","Nicolas","Francois","Patrick","Gerard",\
@@ -178,9 +171,21 @@ def nametorang(name):
     else:
         return "Erreur"
         
+"""  
+#pas fini
+def qui(T,P):
+    for i in range (len(T)):
+        ihih = P[i]
+        eheh = T.index(ihih)
+    return eheh
+"""            
 
+ 
+
+  
+    
 ############################################################################################################################
-#%% Quels élèves ont eu leur semestre ? #################################################################################### 
+#%% Quels élèves ont eu leur semestre ###################################################################################### 
 ############################################################################################################################     
     
 def oui_ou_non(name,T): #savoir si l'etudiant a son UE ou non
@@ -192,7 +197,6 @@ def oui_ou_non(name,T): #savoir si l'etudiant a son UE ou non
             return False
     else:
         return None
-    stop()
  
 
        
@@ -213,14 +217,16 @@ def oui_ou_non_tous(P,T): #affichage de tous les étudiants ayant leur UE et ceu
     for i in range (len(T)):
         if oui_ou_non(P[i],T):
             r.append(P[i]) 
+        else: 
+            g.append(P[i])
     return r
+    return g
     stop()
 
 
 ############################################################################################################################
 #%% Moyenne pour un theme colonne n ########################################################################################
 ############################################################################################################################
-
 def moy_colonne(n):
     moy = np.mean(T,0)[n]
     print("La moyenne de cette UE est de",moy)
@@ -243,7 +249,7 @@ def moy_eleve(name,T,c):  #e : numéro de ligne du tableau et c : Coefficient ic
 
 
 ############################################################################################################################   
-#%% Conversion nb XP <=> note sur 20 #######################################################################################
+#%% Courbe nb XP <=> note sur 20 ###########################################################################################
 ############################################################################################################################ 
 
 AA = [0,3,8,16,25,36,48,62,78,94,112,131,151,172,194,218,243,267,294,321,350]
@@ -286,6 +292,7 @@ def note(xp,AAsur450): #convertit le nombre d'XP en une note sur 20 arrondi à 2
     return arrondir(m,2)
     stop()
 
+
 def courbe_nbXP_note20(plafond): #affiche la courbe pallier/note sur 20
     x = np.linspace(0,plafond+30,10)
     plt.plot(AA,BB,"+")
@@ -293,8 +300,8 @@ def courbe_nbXP_note20(plafond): #affiche la courbe pallier/note sur 20
     plt.xlabel('Note sur 20')
     plt.show()
     stop()
-    
-    
+
+
 tabsommexp = [sum(c[:-1]) for c in maj_tout(T,o)] #fait la somme de tous les éléments du tableau avec les notes qui ne peuvent pas être supérieures au plafond
 notes = [note(xp,AAsur450) for xp in tabsommexp] #convertit le somme de ces xp en note sur 20
 
@@ -308,8 +315,9 @@ def note_sur_20_eleve(T,P,name):
     else :
         return "Erreur"
     stop()
-    
-    
+     
+
+
 def notes_sur_20(): #affiche un graphique avec un nuage de points (élèves ayant au dessus de la moyenne et en dessous)
     tabsommexp = [sum(c[:-1]) for c in maj_tout(T,o)] #fait la somme de tous les éléments du tableau avec les notes qui ne peuvent pas être supérieures au plafond
     notes = [note(xp,AAsur450) for xp in tabsommexp] #convertit le somme de ces xp en note sur 20
@@ -323,8 +331,9 @@ def notes_sur_20(): #affiche un graphique avec un nuage de points (élèves ayan
             compteur_inf += 1
     return compteur_sup,compteur_inf
     stop()
-    
- 
+
+
+
 def graph_notes_sur_20():
     notes_sur_20()
     notes.sort()
@@ -332,7 +341,8 @@ def graph_notes_sur_20():
     plt.plot(range(len(notes)),notes,'+')
     plt.show() 
     stop()
-    
+  
+ 
     
 """#convertit les notes XP en note 20
 def convertion_notes_item(T,n) :
@@ -344,10 +354,7 @@ def convertion_notes_item(T,n) :
         t.append(nf)
     return t
 """
-  
-############################################################################################################################   
-#%% Affiche fiche élève avec prénom, rang, nbXP par thème, moyenne, note finale sur 20 #####################################
-############################################################################################################################    
+    
 
 def fiche_eleve(name,T,c): #création d'une fiche élève avec son prenom, son rang, ses notes, sa moyenne de l'UE
     if nametorang(name) != "Erreur": #verification si prenom present dans la liste
@@ -358,15 +365,14 @@ def fiche_eleve(name,T,c): #création d'une fiche élève avec son prenom, son r
     else:
         print("Erreur")
     stop()
-    
-    
+
+
 ############################################################################################################################   
 #%% Affiche un camembert des élèves au-dessus de la moyenne et en dessous  #################################################
 ############################################################################################################################
-
 def camembertNotes():
     labels = 'Supérieur à 10', 'Inférieur à 10'
-    sizes = list(notes_sur_20()) #liste des bornes sup et inf (cf fonction notes_sur_20)
+    sizes = list(notes_sur_20()) #liste des bornes supérieure et inférieure (voir la fonction notes_sur_20())
     explode = (0, 0.3)  # Met en exergue les 10% en dessous de la moyenne
     
     fig, camembert = plt.subplots()
@@ -375,11 +381,10 @@ def camembertNotes():
 
     plt.show()
     stop()
-    
+
 ############################################################################################################################   
 #%% Histogramme répartition élèves selon nombre d'XP dans chaque thème  ####################################################
 ############################################################################################################################ 
-
 """def theme1():    
     L1 = [row[0] for row in T] #Récupère la première colonne de T dans la liste L1 
                                 #correspondant aux notes du 1er thème
@@ -398,7 +403,7 @@ def camembertNotes():
     hist_xp.set_title("Répartition des élèves selon leur nombre d'XP au thème 1")
     
     plt.show()
-    stop()
+    
 
 def theme2():    
     L2 = [row[1] for row in T]
@@ -417,7 +422,7 @@ def theme2():
     hist_xp.set_title("Répartition des élèves selon leur nombre d'XP au thème 2")
     
     plt.show()
-    stop()
+    
     
 def theme3():    
     L3 = [row[2] for row in T]
@@ -436,7 +441,7 @@ def theme3():
     hist_xp.set_title("Répartition des élèves selon leur nombre d'XP au thème 3")
     
     plt.show()
-    stop()
+    
     
 def theme4():    
     L4 = [row[3] for row in T]
@@ -455,13 +460,13 @@ def theme4():
     hist_xp.set_title("Répartition des élèves selon leur nombre d'XP au thème 4")
     
     plt.show()
-    stop()
+
 """
 
 def theme(): #Fonction regroupant les 4 en optimisant ! :D
     L = [0,1,2,3]
     xmin = 0
-    XMAX = [55,100,100,80] #Choix des axes. Différents en fonction du zoom souhaité pour chaque histo.
+    XMAX = [55,100,100,80]
     ymin = 0
     YMAX = [25,20,25,20]
     for i in L :
@@ -481,4 +486,4 @@ def theme(): #Fonction regroupant les 4 en optimisant ! :D
         plt.show()
         
         i+=1
-        stop()
+    stop()
